@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
 import { items } from "../data/items";
 
@@ -26,6 +25,24 @@ const DashboardLayout = ({ children }) => {
   const { user } = useSelector((state) => state.auth);
   const [searchText, setSearchText] = useState("");
 
+  const searchContainerRef = useRef();
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target)
+      ) {
+        setSearchText("");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const query = searchText.trim().toLowerCase();
 
   const results = items.filter((item) => {
@@ -45,7 +62,7 @@ const DashboardLayout = ({ children }) => {
       <div className="ml-64 min-h-screen w-full bg-gray-50">
         <div className="border-b bg-white p-6 shadow">
           <div className="flex items-center gap-6">
-            <div className="relative">
+            <div className="relative" ref={searchContainerRef}>
               <input
                 type="search"
                 value={searchText}
