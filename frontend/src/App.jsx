@@ -7,6 +7,8 @@ import { Sales } from "./pages/Sales";
 import { Register } from "./pages/Register";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { ToastContainer } from "react-toastify";
+import { Searchtxt } from "./pages/Search";
+import { Contact } from "./pages/Contact";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
@@ -38,6 +40,22 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Sales />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <PrivateRoute>
+                <Searchtxt />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <PrivateRoute>
+                <Contact />
               </PrivateRoute>
             }
           />

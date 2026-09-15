@@ -45,6 +45,23 @@ export const Sidebar = () => {
         >
           Sales
         </NavLink>
+        <NavLink
+          to="/search"
+          className={({ isActive }) =>
+            isActive ? `${linkClass} ${activeClass}` : linkClass
+          }
+        >
+          Search
+        </NavLink>
+
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? `${linkClass} ${activeClass}` : linkClass
+          }
+        >
+          Contact us
+        </NavLink>
 
         {/* Logout as a button instead of NavLink */}
         <button
